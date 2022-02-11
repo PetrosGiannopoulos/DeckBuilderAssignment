@@ -1,0 +1,4 @@
+Name: Raticate
+Type: Colorless
+HP: 60
+Rarity: Uncommon

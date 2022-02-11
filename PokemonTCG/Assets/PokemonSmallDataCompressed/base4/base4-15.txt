@@ -1,0 +1,4 @@
+Name: Poliwrath
+Type: Water
+HP: 90
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Professor Oak
+Type: None
+HP: None
+Rarity: Uncommon

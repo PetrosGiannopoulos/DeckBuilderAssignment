@@ -1,0 +1,4 @@
+Name: Oddish
+Type: Grass
+HP: 50
+Rarity: Common

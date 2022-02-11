@@ -1,0 +1,4 @@
+Name: Primeape
+Type: Fighting
+HP: 70
+Rarity: Uncommon

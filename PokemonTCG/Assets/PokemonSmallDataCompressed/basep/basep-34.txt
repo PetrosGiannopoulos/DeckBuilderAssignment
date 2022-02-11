@@ -1,0 +1,4 @@
+Name: Entei
+Type: Fire
+HP: 80
+Rarity: Promo

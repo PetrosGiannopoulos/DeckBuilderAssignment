@@ -1,0 +1,4 @@
+Name: Lucky Stadium
+Type: None
+HP: None
+Rarity: Promo

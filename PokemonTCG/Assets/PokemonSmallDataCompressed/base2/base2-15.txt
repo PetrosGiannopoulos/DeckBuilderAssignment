@@ -1,0 +1,4 @@
+Name: Vileplume
+Type: Grass
+HP: 80
+Rarity: Rare Holo

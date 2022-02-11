@@ -1,0 +1,4 @@
+Name: Growlithe
+Type: Fire
+HP: 60
+Rarity: Uncommon

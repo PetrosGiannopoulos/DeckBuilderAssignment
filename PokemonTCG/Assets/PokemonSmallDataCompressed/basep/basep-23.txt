@@ -1,0 +1,4 @@
+Name: Zapdos
+Type: Lightning
+HP: 70
+Rarity: Promo

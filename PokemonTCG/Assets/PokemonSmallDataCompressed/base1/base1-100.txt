@@ -1,0 +1,4 @@
+Name: Lightning Energy
+Type: None
+HP: None
+Rarity: Common

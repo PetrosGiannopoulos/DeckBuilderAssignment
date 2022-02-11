@@ -1,0 +1,4 @@
+Name: Beedrill
+Type: Grass
+HP: 80
+Rarity: Rare

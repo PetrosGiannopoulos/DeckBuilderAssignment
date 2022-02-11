@@ -1,0 +1,4 @@
+Name: Surfing Pikachu
+Type: Lightning
+HP: 50
+Rarity: Promo

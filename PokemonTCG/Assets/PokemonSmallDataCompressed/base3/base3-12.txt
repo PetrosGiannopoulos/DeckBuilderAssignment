@@ -1,0 +1,4 @@
+Name: Moltres
+Type: Fire
+HP: 70
+Rarity: Rare Holo

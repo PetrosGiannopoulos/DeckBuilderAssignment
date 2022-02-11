@@ -1,0 +1,4 @@
+Name: Energy Search
+Type: None
+HP: None
+Rarity: Common

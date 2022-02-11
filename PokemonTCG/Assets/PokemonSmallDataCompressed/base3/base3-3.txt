@@ -1,0 +1,4 @@
+Name: Ditto
+Type: Colorless
+HP: 50
+Rarity: Rare Holo

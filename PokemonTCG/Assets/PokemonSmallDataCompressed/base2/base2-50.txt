@@ -1,0 +1,4 @@
+Name: Cubone
+Type: Fighting
+HP: 40
+Rarity: Common

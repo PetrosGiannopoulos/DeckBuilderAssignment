@@ -1,0 +1,4 @@
+Name: Fighting Energy
+Type: None
+HP: None
+Rarity: Common

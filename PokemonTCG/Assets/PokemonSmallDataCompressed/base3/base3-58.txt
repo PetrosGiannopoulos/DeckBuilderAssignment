@@ -1,0 +1,4 @@
+Name: Mr. Fuji
+Type: None
+HP: None
+Rarity: Uncommon

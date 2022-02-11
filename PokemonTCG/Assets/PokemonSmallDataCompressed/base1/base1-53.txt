@@ -1,0 +1,4 @@
+Name: Magnemite
+Type: Lightning
+HP: 40
+Rarity: Common

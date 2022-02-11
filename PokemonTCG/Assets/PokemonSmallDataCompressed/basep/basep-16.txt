@@ -1,0 +1,4 @@
+Name: Computer Error
+Type: None
+HP: None
+Rarity: Promo

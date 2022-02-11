@@ -1,0 +1,4 @@
+Name: Magikarp
+Type: Water
+HP: 30
+Rarity: Uncommon

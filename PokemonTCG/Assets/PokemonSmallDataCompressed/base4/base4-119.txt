@@ -1,0 +1,4 @@
+Name: Energy Removal
+Type: None
+HP: None
+Rarity: Common

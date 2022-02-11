@@ -1,0 +1,4 @@
+Name: Charmeleon
+Type: Fire
+HP: 80
+Rarity: Uncommon

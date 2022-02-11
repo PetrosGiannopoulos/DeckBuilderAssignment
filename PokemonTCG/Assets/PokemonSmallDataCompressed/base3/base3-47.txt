@@ -1,0 +1,4 @@
+Name: Geodude
+Type: Fighting
+HP: 50
+Rarity: Common

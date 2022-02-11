@@ -1,0 +1,4 @@
+Name: Machoke
+Type: Fighting
+HP: 80
+Rarity: Uncommon

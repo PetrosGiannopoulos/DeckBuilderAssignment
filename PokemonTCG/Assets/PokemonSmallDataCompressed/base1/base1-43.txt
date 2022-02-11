@@ -1,0 +1,4 @@
+Name: Abra
+Type: Psychic
+HP: 30
+Rarity: Common

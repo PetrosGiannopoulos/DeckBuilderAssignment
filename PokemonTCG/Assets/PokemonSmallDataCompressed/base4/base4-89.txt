@@ -1,0 +1,4 @@
+Name: Rattata
+Type: Colorless
+HP: 30
+Rarity: Common

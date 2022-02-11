@@ -1,0 +1,4 @@
+Name: Gust of Wind
+Type: None
+HP: None
+Rarity: Common

@@ -1,0 +1,4 @@
+Name: Gloom
+Type: Grass
+HP: 60
+Rarity: Uncommon

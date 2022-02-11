@@ -1,0 +1,4 @@
+Name: Arcanine
+Type: Fire
+HP: 70
+Rarity: Promo

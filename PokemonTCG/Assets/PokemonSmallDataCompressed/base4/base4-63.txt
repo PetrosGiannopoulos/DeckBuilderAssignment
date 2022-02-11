@@ -1,0 +1,4 @@
+Name: Wartortle
+Type: Water
+HP: 70
+Rarity: Uncommon

@@ -1,0 +1,4 @@
+Name: Machamp
+Type: Fighting
+HP: 90
+Rarity: Promo

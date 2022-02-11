@@ -1,0 +1,4 @@
+Name: Chansey
+Type: Colorless
+HP: 120
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Mew
+Type: Psychic
+HP: 40
+Rarity: Promo

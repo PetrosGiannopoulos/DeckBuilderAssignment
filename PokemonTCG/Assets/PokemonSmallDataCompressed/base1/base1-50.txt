@@ -1,0 +1,4 @@
+Name: Gastly
+Type: Psychic
+HP: 30
+Rarity: Common

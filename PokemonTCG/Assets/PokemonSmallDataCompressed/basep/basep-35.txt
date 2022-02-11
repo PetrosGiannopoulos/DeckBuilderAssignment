@@ -1,0 +1,4 @@
+Name: Pichu
+Type: Lightning
+HP: 30
+Rarity: Promo

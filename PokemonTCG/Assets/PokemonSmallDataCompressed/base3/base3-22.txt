@@ -1,0 +1,4 @@
+Name: Hitmonlee
+Type: Fighting
+HP: 60
+Rarity: Rare

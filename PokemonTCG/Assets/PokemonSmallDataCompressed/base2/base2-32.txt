@@ -1,0 +1,4 @@
+Name: Wigglytuff
+Type: Colorless
+HP: 80
+Rarity: Rare

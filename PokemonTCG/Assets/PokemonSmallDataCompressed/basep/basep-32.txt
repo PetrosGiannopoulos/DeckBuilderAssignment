@@ -1,0 +1,4 @@
+Name: Smeargle
+Type: Colorless
+HP: 40
+Rarity: Promo

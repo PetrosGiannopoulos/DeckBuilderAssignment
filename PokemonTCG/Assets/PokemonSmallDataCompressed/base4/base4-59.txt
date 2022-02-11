@@ -1,0 +1,4 @@
+Name: Rhydon
+Type: Fighting
+HP: 100
+Rarity: Uncommon

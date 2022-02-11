@@ -1,0 +1,4 @@
+Name: Imposter Professor Oak
+Type: None
+HP: None
+Rarity: Rare

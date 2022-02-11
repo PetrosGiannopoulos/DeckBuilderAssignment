@@ -1,0 +1,4 @@
+Name: Eevee
+Type: Colorless
+HP: 50
+Rarity: Common

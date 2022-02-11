@@ -1,0 +1,4 @@
+Name: Aerodactyl
+Type: Fighting
+HP: 60
+Rarity: Rare

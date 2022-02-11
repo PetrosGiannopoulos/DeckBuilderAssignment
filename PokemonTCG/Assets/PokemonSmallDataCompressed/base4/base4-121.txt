@@ -1,0 +1,4 @@
+Name: Poké Ball
+Type: None
+HP: None
+Rarity: Common

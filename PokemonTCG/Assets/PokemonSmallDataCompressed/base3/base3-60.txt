@@ -1,0 +1,4 @@
+Name: Gambler
+Type: None
+HP: None
+Rarity: Common

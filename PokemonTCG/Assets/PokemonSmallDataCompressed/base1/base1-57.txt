@@ -1,0 +1,4 @@
+Name: Pidgey
+Type: Colorless
+HP: 40
+Rarity: Common

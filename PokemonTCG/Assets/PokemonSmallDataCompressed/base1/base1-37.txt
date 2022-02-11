@@ -1,0 +1,4 @@
+Name: Nidorino
+Type: Grass
+HP: 60
+Rarity: Uncommon

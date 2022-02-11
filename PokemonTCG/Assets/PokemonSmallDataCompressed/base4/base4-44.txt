@@ -1,0 +1,4 @@
+Name: Ivysaur
+Type: Grass
+HP: 60
+Rarity: Uncommon

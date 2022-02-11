@@ -1,0 +1,4 @@
+Name: Double Colorless Energy
+Type: None
+HP: None
+Rarity: Uncommon

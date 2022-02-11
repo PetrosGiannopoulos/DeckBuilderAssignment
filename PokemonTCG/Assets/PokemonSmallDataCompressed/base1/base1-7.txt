@@ -1,0 +1,4 @@
+Name: Hitmonchan
+Type: Fighting
+HP: 70
+Rarity: Rare Holo

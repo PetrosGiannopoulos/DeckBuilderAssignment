@@ -1,0 +1,4 @@
+Name: Nidoqueen
+Type: Grass
+HP: 90
+Rarity: Rare Holo

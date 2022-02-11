@@ -1,0 +1,4 @@
+Name: Onix
+Type: Fighting
+HP: 90
+Rarity: Common

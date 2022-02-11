@@ -1,0 +1,4 @@
+Name: Vulpix
+Type: Fire
+HP: 50
+Rarity: Common

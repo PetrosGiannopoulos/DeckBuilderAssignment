@@ -1,0 +1,4 @@
+Name: Full Heal
+Type: None
+HP: None
+Rarity: Uncommon

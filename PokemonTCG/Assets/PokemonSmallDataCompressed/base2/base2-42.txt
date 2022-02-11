@@ -1,0 +1,4 @@
+Name: Persian
+Type: Colorless
+HP: 70
+Rarity: Uncommon

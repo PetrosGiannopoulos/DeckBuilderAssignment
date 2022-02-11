@@ -1,0 +1,4 @@
+Name: Cloyster
+Type: Water
+HP: 50
+Rarity: Uncommon

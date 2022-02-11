@@ -1,0 +1,4 @@
+Name: Lickitung
+Type: Colorless
+HP: 90
+Rarity: Uncommon

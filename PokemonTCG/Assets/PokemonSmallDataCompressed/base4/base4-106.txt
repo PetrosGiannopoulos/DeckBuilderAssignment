@@ -1,0 +1,4 @@
+Name: Pokémon Trader
+Type: None
+HP: None
+Rarity: Rare

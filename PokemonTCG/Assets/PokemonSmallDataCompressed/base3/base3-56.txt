@@ -1,0 +1,4 @@
+Name: Tentacool
+Type: Water
+HP: 30
+Rarity: Common

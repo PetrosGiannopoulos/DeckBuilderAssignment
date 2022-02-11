@@ -1,0 +1,4 @@
+Name: Mewtwo
+Type: Psychic
+HP: 70
+Rarity: Promo

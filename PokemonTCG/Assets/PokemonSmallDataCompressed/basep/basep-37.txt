@@ -1,0 +1,4 @@
+Name: Hitmontop
+Type: Fighting
+HP: 60
+Rarity: Promo

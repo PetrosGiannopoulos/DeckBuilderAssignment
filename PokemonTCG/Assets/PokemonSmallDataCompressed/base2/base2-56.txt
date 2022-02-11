@@ -1,0 +1,4 @@
+Name: Meowth
+Type: Colorless
+HP: 50
+Rarity: Common

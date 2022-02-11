@@ -1,0 +1,4 @@
+Name: Scoop Up
+Type: None
+HP: None
+Rarity: Rare

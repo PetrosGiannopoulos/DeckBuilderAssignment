@@ -1,0 +1,4 @@
+Name: Krabby
+Type: Water
+HP: 50
+Rarity: Common

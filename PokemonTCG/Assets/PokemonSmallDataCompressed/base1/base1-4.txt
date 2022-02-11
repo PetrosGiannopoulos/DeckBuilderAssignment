@@ -1,0 +1,4 @@
+Name: Charizard
+Type: Fire
+HP: 120
+Rarity: Rare Holo

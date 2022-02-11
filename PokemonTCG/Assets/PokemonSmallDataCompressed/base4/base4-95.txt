@@ -1,0 +1,4 @@
+Name: Staryu
+Type: Water
+HP: 40
+Rarity: Common

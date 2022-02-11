@@ -1,0 +1,4 @@
+Name: Eevee
+Type: Colorless
+HP: 30
+Rarity: Promo

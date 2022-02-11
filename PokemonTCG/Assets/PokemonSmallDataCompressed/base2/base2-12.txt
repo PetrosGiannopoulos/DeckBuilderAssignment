@@ -1,0 +1,4 @@
+Name: Vaporeon
+Type: Water
+HP: 80
+Rarity: Rare Holo

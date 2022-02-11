@@ -1,0 +1,4 @@
+Name: Pokémon Tower
+Type: None
+HP: None
+Rarity: Promo

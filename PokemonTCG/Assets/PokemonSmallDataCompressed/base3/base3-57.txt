@@ -1,0 +1,4 @@
+Name: Zubat
+Type: Grass
+HP: 40
+Rarity: Common

@@ -1,0 +1,4 @@
+Name: Venusaur
+Type: Grass
+HP: 100
+Rarity: Promo

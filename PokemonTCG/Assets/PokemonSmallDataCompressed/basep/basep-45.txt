@@ -1,0 +1,4 @@
+Name: Scyther
+Type: Grass
+HP: 60
+Rarity: Promo

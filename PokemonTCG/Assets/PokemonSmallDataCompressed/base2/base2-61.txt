@@ -1,0 +1,4 @@
+Name: Rhyhorn
+Type: Fighting
+HP: 70
+Rarity: Common

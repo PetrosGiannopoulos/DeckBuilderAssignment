@@ -1,0 +1,4 @@
+Name: Flareon
+Type: Fire
+HP: 70
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Goldeen
+Type: Water
+HP: 40
+Rarity: Common

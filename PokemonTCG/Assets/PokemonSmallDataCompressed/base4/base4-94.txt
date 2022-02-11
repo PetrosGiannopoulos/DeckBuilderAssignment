@@ -1,0 +1,4 @@
+Name: Starmie
+Type: Water
+HP: 60
+Rarity: Common

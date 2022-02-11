@@ -1,0 +1,4 @@
+Name: Electrode
+Type: Lightning
+HP: 80
+Rarity: Rare

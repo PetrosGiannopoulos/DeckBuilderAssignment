@@ -1,0 +1,4 @@
+Name: Ponyta
+Type: Fire
+HP: 40
+Rarity: Common

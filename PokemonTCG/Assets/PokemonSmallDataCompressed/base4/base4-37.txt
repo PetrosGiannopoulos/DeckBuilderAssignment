@@ -1,0 +1,4 @@
+Name: Dodrio
+Type: Colorless
+HP: 70
+Rarity: Uncommon

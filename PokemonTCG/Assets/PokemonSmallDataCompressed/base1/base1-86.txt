@@ -1,0 +1,4 @@
+Name: Pokémon Flute
+Type: None
+HP: None
+Rarity: Uncommon

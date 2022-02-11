@@ -1,0 +1,4 @@
+Name: Articuno
+Type: Water
+HP: 70
+Rarity: Rare

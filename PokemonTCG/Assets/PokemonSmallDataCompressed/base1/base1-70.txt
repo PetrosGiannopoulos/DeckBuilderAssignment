@@ -1,0 +1,4 @@
+Name: Clefairy Doll
+Type: None
+HP: 10
+Rarity: Rare

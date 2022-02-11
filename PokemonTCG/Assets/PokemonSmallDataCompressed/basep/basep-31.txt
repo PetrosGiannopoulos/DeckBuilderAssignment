@@ -1,0 +1,4 @@
+Name: Cleffa
+Type: Colorless
+HP: 30
+Rarity: Promo

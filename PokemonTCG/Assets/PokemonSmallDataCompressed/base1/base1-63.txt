@@ -1,0 +1,4 @@
+Name: Squirtle
+Type: Water
+HP: 40
+Rarity: Common

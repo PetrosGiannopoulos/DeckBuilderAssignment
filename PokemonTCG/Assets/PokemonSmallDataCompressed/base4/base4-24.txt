@@ -1,0 +1,4 @@
+Name: Electabuzz
+Type: Lightning
+HP: 70
+Rarity: Rare

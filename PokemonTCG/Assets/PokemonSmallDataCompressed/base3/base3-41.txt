@@ -1,0 +1,4 @@
+Name: Sandslash
+Type: Fighting
+HP: 70
+Rarity: Uncommon

@@ -1,0 +1,4 @@
+Name: Dragonite
+Type: Colorless
+HP: 100
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Hypno
+Type: Psychic
+HP: 90
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Magmar
+Type: Fire
+HP: 70
+Rarity: Uncommon

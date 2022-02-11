@@ -1,0 +1,4 @@
+Name: Snorlax
+Type: Colorless
+HP: 90
+Rarity: Rare Holo

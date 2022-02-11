@@ -1,0 +1,4 @@
+Name: Jigglypuff
+Type: Colorless
+HP: 50
+Rarity: Promo

@@ -1,0 +1,4 @@
+Name: Super Energy Removal
+Type: None
+HP: None
+Rarity: Rare

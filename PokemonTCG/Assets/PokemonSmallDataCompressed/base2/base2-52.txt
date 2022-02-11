@@ -1,0 +1,4 @@
+Name: Exeggcute
+Type: Grass
+HP: 50
+Rarity: Common

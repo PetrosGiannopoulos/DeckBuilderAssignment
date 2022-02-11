@@ -1,0 +1,4 @@
+Name: Marowak
+Type: Fighting
+HP: 60
+Rarity: Uncommon

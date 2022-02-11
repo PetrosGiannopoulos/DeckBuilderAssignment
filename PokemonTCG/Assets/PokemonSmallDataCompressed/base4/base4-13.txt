@@ -1,0 +1,4 @@
+Name: Ninetales
+Type: Fire
+HP: 80
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Venomoth
+Type: Grass
+HP: 70
+Rarity: Rare

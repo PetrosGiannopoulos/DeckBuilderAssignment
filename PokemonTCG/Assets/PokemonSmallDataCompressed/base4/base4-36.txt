@@ -1,0 +1,4 @@
+Name: Dewgong
+Type: Water
+HP: 80
+Rarity: Uncommon

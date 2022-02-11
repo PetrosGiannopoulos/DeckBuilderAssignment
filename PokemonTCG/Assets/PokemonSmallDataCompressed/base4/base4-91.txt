@@ -1,0 +1,4 @@
+Name: Sandshrew
+Type: Fighting
+HP: 40
+Rarity: Common

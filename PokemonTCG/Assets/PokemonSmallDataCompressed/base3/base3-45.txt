@@ -1,0 +1,4 @@
+Name: Weezing
+Type: Grass
+HP: 60
+Rarity: Uncommon

@@ -1,0 +1,4 @@
+Name: Dark Persian
+Type: Colorless
+HP: 60
+Rarity: Promo

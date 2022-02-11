@@ -1,0 +1,4 @@
+Name: Pokémon Breeder
+Type: None
+HP: None
+Rarity: Rare

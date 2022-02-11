@@ -1,0 +1,4 @@
+Name: Water Energy
+Type: None
+HP: None
+Rarity: Common

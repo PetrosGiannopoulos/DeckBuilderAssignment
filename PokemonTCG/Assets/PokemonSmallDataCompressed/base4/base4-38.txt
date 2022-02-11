@@ -1,0 +1,4 @@
+Name: Dratini
+Type: Colorless
+HP: 40
+Rarity: Uncommon

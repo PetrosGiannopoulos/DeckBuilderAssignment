@@ -1,0 +1,4 @@
+Name: Venonat
+Type: Grass
+HP: 40
+Rarity: Common

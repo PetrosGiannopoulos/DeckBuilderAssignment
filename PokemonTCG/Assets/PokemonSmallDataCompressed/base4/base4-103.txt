@@ -1,0 +1,4 @@
+Name: Item Finder
+Type: None
+HP: None
+Rarity: Rare

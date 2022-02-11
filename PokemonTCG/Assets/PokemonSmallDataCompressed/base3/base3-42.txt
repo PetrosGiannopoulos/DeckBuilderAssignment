@@ -1,0 +1,4 @@
+Name: Seadra
+Type: Water
+HP: 60
+Rarity: Uncommon

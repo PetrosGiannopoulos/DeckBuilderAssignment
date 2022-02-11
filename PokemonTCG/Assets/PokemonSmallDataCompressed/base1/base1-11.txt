@@ -1,0 +1,4 @@
+Name: Nidoking
+Type: Grass
+HP: 90
+Rarity: Rare Holo

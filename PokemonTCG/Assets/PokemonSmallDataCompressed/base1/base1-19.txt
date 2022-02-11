@@ -1,0 +1,4 @@
+Name: Dugtrio
+Type: Fighting
+HP: 70
+Rarity: Rare

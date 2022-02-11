@@ -1,0 +1,4 @@
+Name: Unown [J]
+Type: Psychic
+HP: 40
+Rarity: Promo

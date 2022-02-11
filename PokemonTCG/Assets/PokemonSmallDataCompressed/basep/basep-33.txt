@@ -1,0 +1,4 @@
+Name: Scizor
+Type: Metal
+HP: 70
+Rarity: Promo

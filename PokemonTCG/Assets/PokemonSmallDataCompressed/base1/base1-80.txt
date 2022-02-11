@@ -1,0 +1,4 @@
+Name: Defender
+Type: None
+HP: None
+Rarity: Uncommon

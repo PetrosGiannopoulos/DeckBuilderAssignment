@@ -1,0 +1,4 @@
+Name: Slowpoke
+Type: Psychic
+HP: 50
+Rarity: Common

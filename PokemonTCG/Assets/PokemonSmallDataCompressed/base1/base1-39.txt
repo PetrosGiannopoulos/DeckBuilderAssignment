@@ -1,0 +1,4 @@
+Name: Porygon
+Type: Colorless
+HP: 30
+Rarity: Uncommon

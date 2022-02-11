@@ -1,0 +1,4 @@
+Name: Flying Pikachu
+Type: Lightning
+HP: 40
+Rarity: Promo

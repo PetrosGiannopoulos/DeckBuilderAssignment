@@ -1,0 +1,4 @@
+Name: Clefairy
+Type: Colorless
+HP: 40
+Rarity: Rare Holo

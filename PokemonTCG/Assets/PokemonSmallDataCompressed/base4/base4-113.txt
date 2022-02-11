@@ -1,0 +1,4 @@
+Name: PlusPower
+Type: None
+HP: None
+Rarity: Uncommon

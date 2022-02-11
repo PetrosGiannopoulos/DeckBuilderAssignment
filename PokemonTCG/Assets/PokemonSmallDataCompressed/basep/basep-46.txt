@@ -1,0 +1,4 @@
+Name: Electabuzz
+Type: Lightning
+HP: 60
+Rarity: Promo

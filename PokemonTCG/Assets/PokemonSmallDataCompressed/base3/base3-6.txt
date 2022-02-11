@@ -1,0 +1,4 @@
+Name: Haunter
+Type: Psychic
+HP: 50
+Rarity: Rare Holo

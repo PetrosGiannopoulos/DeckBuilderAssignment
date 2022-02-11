@@ -1,0 +1,4 @@
+Name: Kabuto
+Type: Fighting
+HP: 30
+Rarity: Common

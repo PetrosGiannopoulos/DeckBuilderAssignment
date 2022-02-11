@@ -1,0 +1,4 @@
+Name: Poliwag
+Type: Water
+HP: 40
+Rarity: Common

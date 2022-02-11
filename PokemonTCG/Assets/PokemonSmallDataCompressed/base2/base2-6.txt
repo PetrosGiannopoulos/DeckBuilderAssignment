@@ -1,0 +1,4 @@
+Name: Mr. Mime
+Type: Psychic
+HP: 40
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Celebi
+Type: Grass
+HP: 50
+Rarity: Promo

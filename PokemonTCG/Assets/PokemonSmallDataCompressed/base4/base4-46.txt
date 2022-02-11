@@ -1,0 +1,4 @@
+Name: Kadabra
+Type: Psychic
+HP: 60
+Rarity: Uncommon

@@ -1,0 +1,4 @@
+Name: Pokémon Center
+Type: None
+HP: None
+Rarity: Promo

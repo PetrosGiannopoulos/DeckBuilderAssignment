@@ -1,0 +1,4 @@
+Name: Tangela
+Type: Grass
+HP: 50
+Rarity: Common

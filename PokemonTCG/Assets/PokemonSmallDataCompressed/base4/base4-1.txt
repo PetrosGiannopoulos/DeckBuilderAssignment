@@ -1,0 +1,4 @@
+Name: Alakazam
+Type: Psychic
+HP: 80
+Rarity: Rare Holo

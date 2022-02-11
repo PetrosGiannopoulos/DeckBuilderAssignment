@@ -1,0 +1,4 @@
+Name: Misdreavus
+Type: Psychic
+HP: 50
+Rarity: Promo

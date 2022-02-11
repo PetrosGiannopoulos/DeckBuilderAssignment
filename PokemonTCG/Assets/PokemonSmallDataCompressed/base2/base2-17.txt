@@ -1,0 +1,4 @@
+Name: Clefable
+Type: Colorless
+HP: 70
+Rarity: Rare

@@ -1,0 +1,4 @@
+Name: Pidgeot
+Type: Colorless
+HP: 80
+Rarity: Rare Holo

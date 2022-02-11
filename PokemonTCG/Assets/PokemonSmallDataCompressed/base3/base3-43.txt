@@ -1,0 +1,4 @@
+Name: Slowbro
+Type: Psychic
+HP: 60
+Rarity: Uncommon

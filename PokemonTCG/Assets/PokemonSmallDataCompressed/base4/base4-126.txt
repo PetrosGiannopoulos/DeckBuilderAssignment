@@ -1,0 +1,4 @@
+Name: Fire Energy
+Type: None
+HP: None
+Rarity: Common

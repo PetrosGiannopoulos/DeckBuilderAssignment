@@ -1,0 +1,4 @@
+Name: Omanyte
+Type: Water
+HP: 40
+Rarity: Common

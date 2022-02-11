@@ -1,0 +1,4 @@
+Name: Machop
+Type: Fighting
+HP: 50
+Rarity: Common

@@ -1,0 +1,4 @@
+Name: Weepinbell
+Type: Grass
+HP: 70
+Rarity: Uncommon

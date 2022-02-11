@@ -1,0 +1,4 @@
+Name: Magneton
+Type: Lightning
+HP: 60
+Rarity: Rare Holo

@@ -1,0 +1,4 @@
+Name: Raichu
+Type: Lightning
+HP: 80
+Rarity: Rare Holo

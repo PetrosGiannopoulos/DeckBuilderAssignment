@@ -1,0 +1,4 @@
+Name: Pidgeotto
+Type: Colorless
+HP: 60
+Rarity: Rare

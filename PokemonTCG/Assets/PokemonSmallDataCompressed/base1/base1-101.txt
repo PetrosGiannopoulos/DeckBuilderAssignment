@@ -1,0 +1,4 @@
+Name: Psychic Energy
+Type: None
+HP: None
+Rarity: Common
