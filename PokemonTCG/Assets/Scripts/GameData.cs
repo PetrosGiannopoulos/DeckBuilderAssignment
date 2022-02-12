@@ -7,6 +7,9 @@ public class GameData : MonoBehaviour
 
     List<List<TextAsset>> dataInfo = new List<List<TextAsset>>();
     List<List<Texture>> dataTextureInfo = new List<List<Texture>>();
+    List<List<string>> decksInfo = new List<List<string>>();
+
+    List<string> deckBuilderInfo = new List<string>(); 
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,28 @@ public class GameData : MonoBehaviour
         this.dataTextureInfo.Add(dataTextureInfo);
     }
 
+    public void AddDeckInfo(string[] deckInfo)
+    {
+        List<string> listDeckInfo = new List<string>();
+        for (int i = 0; i < deckInfo.Length; i++) listDeckInfo.Add(deckInfo[i]);
+        decksInfo.Add(listDeckInfo);
+    }
+
+    public void SetBuilderInfo(List<string> builderInfo)
+    {
+        this.deckBuilderInfo = builderInfo;
+    }
+
+    public List<string> GetDeckInfo(int i)
+    {
+        return decksInfo[i];
+    }
+
+    public void UnloadDecks()
+    {
+        decksInfo.Clear();
+    }
+
     public List<List<TextAsset>> GetDataInfo()
     {
         return dataInfo;
@@ -32,6 +57,8 @@ public class GameData : MonoBehaviour
     {
         return dataTextureInfo;
     }
+
+    
 
     // Update is called once per frame
     void Update()

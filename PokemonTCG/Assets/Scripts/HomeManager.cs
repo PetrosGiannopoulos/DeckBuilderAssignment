@@ -25,6 +25,7 @@ public class HomeManager : MonoBehaviour
         if (deckCollectionObjects)
         {
             SceneManager.UnloadSceneAsync("DeckCollectionScene");
+            GameObject.Find("GameData").GetComponent<GameData>().UnloadDecks();
         }
 
         InitPlayback();

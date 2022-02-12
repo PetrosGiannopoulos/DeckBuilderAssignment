@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeckBuilderManager : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class DeckBuilderManager : MonoBehaviour
     void Awake()
     {
         GameObject deckCollectionObjects = GameObject.Find("DeckCollectionObjects");
-        Destroy(deckCollectionObjects);
+
+        if (deckCollectionObjects) SceneManager.UnloadSceneAsync("DeckCollectionScene");
+        //Destroy(deckCollectionObjects);
 
         //Debug.Log($"PersistentPath: {Application.persistentDataPath}");
     }
