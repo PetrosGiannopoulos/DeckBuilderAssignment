@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 88e97612ceb17a440878cce6652a0ac0
+  - enabled: 1
+    path: Assets/Scenes/HomeScene.unity
+    guid: 28c856118da7342449a28bf127542a60
+  - enabled: 1
+    path: Assets/Scenes/DeckCollectionScene.unity
+    guid: 6a11759f63e949b43a05cb6538556302
+  - enabled: 1
+    path: Assets/Scenes/DeckBuilderScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/AboutScene.unity
+    guid: 2fc089ffe22775846bbd34521b7993b1
   m_configObjects: {}
