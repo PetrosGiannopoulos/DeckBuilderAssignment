@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class DeckInstance : MonoBehaviour
 {
     List<string> deckInfo = new List<string>();
+    public string id;
+    public string path;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,11 @@ public class DeckInstance : MonoBehaviour
     public void SetDeckInfo(List<string> deckInfo)
     {
         this.deckInfo = deckInfo;
+    }
+
+    public void SetDeckInfo(string[] deckInfo)
+    {
+        foreach(string s in deckInfo)this.deckInfo.Add(s);
     }
 
     public List<string> GetDeckInfo()

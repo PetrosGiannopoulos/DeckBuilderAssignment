@@ -17,6 +17,7 @@ public class DeckCollectionManager : MonoBehaviour
     public GameObject deckIconPrefab;
 
     List<GameObject> decks = new List<GameObject>();
+    
 
     // Start is called before the first frame update
     void Start()
@@ -52,12 +53,16 @@ public class DeckCollectionManager : MonoBehaviour
         foreach(FileInfo fileInfo in allDecksInfo)
         {
             string[] lines = File.ReadAllLines(saveFolderPath + "/" + fileInfo.Name);
-            gameData.GetComponent<GameData>().AddDeckInfo(lines);
+            gameData.GetComponent<GameData>().AddDeckInfo(lines,fileInfo.Name);
 
             var deckObj = Instantiate(deckIconPrefab, contentParent.transform);
             deckObj.name = fileInfo.Name.Replace(".txt","");
             deckObj.GetComponentInChildren<TextMeshProUGUI>().text = deckObj.name;
             deckObj.GetComponent<DeckInstance>().SetDeckInfo(gameData.GetComponent<GameData>().GetDeckInfo(counter));
+
+            deckObj.GetComponent<DeckInstance>().id = fileInfo.Name;
+            deckObj.GetComponent<DeckInstance>().path = saveFolderPath + "/" + fileInfo.Name;
+           
 
             counter++;
             decks.Add(deckObj);
@@ -77,7 +82,14 @@ public class DeckCollectionManager : MonoBehaviour
         if (!dInfo.Exists) dInfo.Create();
 
         string fullPath = saveFolderPath + "/" + deckIcon.GetComponentInChildren<TextMeshProUGUI>().text+".txt";
-        if (!File.Exists(fullPath)) File.Create(fullPath);
+        deckIcon.GetComponent<DeckInstance>().path = fullPath;
+        FileStream fstream = null;
+        if (!File.Exists(fullPath))
+        {
+            fstream = File.Create(fullPath);
+            fstream.Close();
+
+        }
 
         if (deckIcon.GetComponent<DeckInstance>().GetDeckInfo().Count == 0) return;
         File.WriteAllLines(fullPath,deckIcon.GetComponent<DeckInstance>().GetDeckInfo());
@@ -101,6 +113,14 @@ public class DeckCollectionManager : MonoBehaviour
 
         deckObj.GetComponentInChildren<TextMeshProUGUI>().text = "Empty "+counter;
 
+        deckObj.GetComponent<DeckInstance>().id = deckObj.GetComponentInChildren<TextMeshProUGUI>().text+".txt";
+        deckObj.name = deckObj.GetComponentInChildren<TextMeshProUGUI>().text;
+
+        GameObject gameData = GameObject.Find("GameData");
+        string[] lines = new string[] { };
+        gameData.GetComponent<GameData>().AddDeckInfo(lines, deckObj.GetComponent<DeckInstance>().id);
+
+        decks.Add(deckObj);
         SaveDeck(deckObj);
 
         yield return new WaitForSeconds(1);
@@ -132,7 +152,42 @@ public class DeckCollectionManager : MonoBehaviour
 
     public void Import()
     {
+
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
         //Optional
+        string path = EditorUtility.OpenFilePanel("Import Deck", "", "txt");
+        if (path.Length != 0)
+        {
+            string[] lines = File.ReadAllLines(path);
+
+            string fileName = Path.GetFileName(path).Replace(".txt", "");
+
+            GameObject[] deckIcons = GameObject.FindGameObjectsWithTag("DeckIcon");
+            bool changeName = false;
+            foreach(GameObject goDeck in deckIcons)
+            {
+                if (goDeck.name.Equals(fileName))
+                {
+                    changeName = true;
+                    break;
+                }
+            }
+
+            var deckObj = Instantiate(deckIconPrefab, contentParent.transform);
+
+            if (changeName) fileName += "_2";
+
+            deckObj.GetComponentInChildren<TextMeshProUGUI>().text = fileName;
+            gameData.GetComponent<GameData>().AddDeckInfo(lines,fileName+".txt");
+            deckObj.GetComponent<DeckInstance>().SetDeckInfo(lines);
+
+            deckObj.GetComponent<DeckInstance>().id = fileName + ".txt";
+            
+            decks.Add(deckObj);
+
+            SaveDeck(deckObj);
+        }
     }
 
     public void Export()
@@ -141,16 +196,52 @@ public class DeckCollectionManager : MonoBehaviour
         string path = EditorUtility.SaveFilePanel("Select Path to Export Deck",Application.persistentDataPath+"/Decks", ".txt","txt");
         if (path.Length!=0)
         {
-            if (!File.Exists(path)) File.Create(path);
+            FileStream fstream = null;
+            if (!File.Exists(path))
+            {
+                fstream = File.Create(path);
+                fstream.Close();
+            }
             GameObject deckIcon = GetSelectDeck();
             if (deckIcon.GetComponent<DeckInstance>().GetDeckInfo().Count == 0) return;
-            File.WriteAllLines(path, deckIcon.GetComponent<DeckInstance>().GetDeckInfo());
+            File.WriteAllLines(path, deckIcon.GetComponent<DeckInstance>().GetDeckInfo().ToArray());
+            
         }
         Debug.Log($"ExportPath: {path}");
     }
 
     public void Delete()
     {
+        GameObject deckIcon = GetSelectDeck();
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null)
+        {
+            Debug.Log("GameData is null");
+            return;
+        }
+        if (decks.Count == 0)
+        {
+            Debug.Log("DeckCount is 0");
+            return;
+        }
+        if (GetSelectDeck() == null)
+        {
+            Debug.Log("SelectDeck is null");
+            return;
+        }
+
+        string path = deckIcon.GetComponent<DeckInstance>().path;
+        
+        if (File.Exists(path))
+        {
+            gameData.GetComponent<GameData>().RemoveDeckInfo(deckIcon.GetComponent<DeckInstance>().id);
+            Destroy(deckIcon);
+            decks.Remove(deckIcon);
+            
+            File.Delete(path);
+
+        }
+
 
     }
 
