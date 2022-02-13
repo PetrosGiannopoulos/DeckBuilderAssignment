@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Linq;
+using System.IO;
 
 public class DeckBuilderManager : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class DeckBuilderManager : MonoBehaviour
         if (deckCollectionObjects) SceneManager.UnloadSceneAsync("DeckCollectionScene");
 
         LoadCollectionCards();
+        LoadDeck();
     }
 
     public void LoadCollectionCards()
@@ -69,6 +71,101 @@ public class DeckBuilderManager : MonoBehaviour
         verticalScrollbar.value = 1.0f;
 
 
+    }
+
+    public void LoadDeck()
+    {
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
+
+        List<string> deckData = gameData.GetComponent<GameData>().GetBuilderInfo();
+
+        List<List<Sprite>> dataSprites = gameData.GetComponent<GameData>().GetDataSpriteInfo();
+        List<List<TextAsset>> dataInfo = gameData.GetComponent<GameData>().GetDataInfo();
+        List<string> singleNameList = new List<string>();
+        List<Sprite> singleSpriteList = new List<Sprite>();
+        for (int i = 0; i < dataSprites.Count; i++)
+        {
+            for (int j = 0; j < dataSprites[i].Count; j++)
+            {
+                Sprite spriteInstance = dataSprites[i][j];
+                TextAsset textInstance = dataInfo[i][j];
+
+                string[] lines = textInstance.text.Split('\n');
+
+                string[] nameData = lines[0].Split(' ');
+                string name = nameData[1];
+                if (nameData.Length > 2)
+                {
+                    for (int k = 2; k < nameData.Length; k++) name += " " + nameData[k];
+                }
+                singleNameList.Add(name);
+                singleSpriteList.Add(spriteInstance);
+            }
+        }
+
+
+        //check validity - optional
+        foreach (string s in deckData)
+        {
+            string[] lineWords = s.Split(',');
+
+            int count;
+            //validity check
+            if (int.TryParse(lineWords[0], out count) == false) return;
+
+            string name = lineWords[1];
+            
+            
+            Sprite sprite = null;
+            foreach(GameObject collectionCard in collectionCards)
+            {
+                //remove crlf from end of line
+                string sn = collectionCard.name.Replace("\r","").Replace("\n","");
+                
+                if (sn.Equals(name))
+                {
+                    Debug.Log($"Snames: {sn}");
+                    sprite = collectionCard.GetComponent<Image>().sprite;
+                    break;
+                }
+            }
+
+            //validity check
+            if (sprite == null) return;
+            //Debug.Log($"LoadDeckName: {name}");
+            for (int j = 0; j < count; j++)
+            {
+                AddEditCard(name, sprite);
+            }
+
+
+        }
+
+    }
+
+    public void SaveChanges()
+    {
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
+
+        string saveFolderPath = gameData.GetComponent<GameData>().GetBuilderPath();
+
+        
+
+        List<string> originalData = gameData.GetComponent<GameData>().GetBuilderInfo();
+        List<string> currentData = new List<string>();
+
+        GameObject[] editCard = GameObject.FindGameObjectsWithTag("EditCard");
+        foreach(GameObject go in editCard)
+        {
+            
+            string s = ""+go.GetComponent<EditCardData>().GetCount()+","+go.GetComponent<EditCardData>().GetName();
+            s = s.Replace("\r","").Replace("\n","");
+            currentData.Add(s);
+        }
+
+        File.WriteAllLines(saveFolderPath, currentData.ToArray());
     }
 
     public void FilterByType()
@@ -122,7 +219,8 @@ public class DeckBuilderManager : MonoBehaviour
                 Debug.Log($"HPDAtaFormat: {hpData[1][0]}, {hpData[1][4]}");
                 
             }*/
-            int hp = hpData[1].Contains("None")?0:int.Parse(hpData[1]);
+            hpData[1] = hpData[1].Replace("\r", "").Replace("\n", "");
+            int hp = hpData[1].Equals("None")?0:int.Parse(hpData[1]);
 
             string[] rarityData = lines[3].Split(' ');
             string rarity = rarityData[1];
@@ -148,6 +246,8 @@ public class DeckBuilderManager : MonoBehaviour
 
             collectionCards.Add(cardCollectionInstance);
         }
+
+        verticalScrollbar.value = 1.0f;
     }
 
     public void FilterByHP()
@@ -202,7 +302,8 @@ public class DeckBuilderManager : MonoBehaviour
                 Debug.Log($"HPDAtaFormat: {hpData[1][0]}, {hpData[1][4]}");
                 
             }*/
-            int hp = hpData[1].Contains("None") ? 0 : int.Parse(hpData[1]);
+            hpData[1] = hpData[1].Replace("\r", "").Replace("\n", "");
+            int hp = hpData[1].Equals("None") ? 0 : int.Parse(hpData[1]);
 
             string[] rarityData = lines[3].Split(' ');
             string rarity = rarityData[1];
@@ -228,6 +329,8 @@ public class DeckBuilderManager : MonoBehaviour
 
             collectionCards.Add(cardCollectionInstance);
         }
+
+        verticalScrollbar.value = 1.0f;
     }
 
     public void FilterByRarity()
@@ -282,7 +385,8 @@ public class DeckBuilderManager : MonoBehaviour
                 Debug.Log($"HPDAtaFormat: {hpData[1][0]}, {hpData[1][4]}");
                 
             }*/
-            int hp = hpData[1].Contains("None") ? 0 : int.Parse(hpData[1]);
+            hpData[1] = hpData[1].Replace("\r", "").Replace("\n", "");
+            int hp = hpData[1].Equals("None") ? 0 : int.Parse(hpData[1]);
 
             string[] rarityData = lines[3].Split(' ');
             string rarity = rarityData[1];
@@ -309,6 +413,8 @@ public class DeckBuilderManager : MonoBehaviour
 
             collectionCards.Add(cardCollectionInstance);
         }
+
+        verticalScrollbar.value = 1.0f;
     }
 
     public int GetRarityOrder(string rarity)
@@ -371,7 +477,10 @@ public class DeckBuilderManager : MonoBehaviour
     }
     public void CancelFilters()
     {
+        foreach (GameObject go in collectionCards) Destroy(go);
+        collectionCards.Clear();
 
+        LoadCollectionCards();
     }
 
     public void RemoveEditCard(GameObject editCardObj)
@@ -391,7 +500,7 @@ public class DeckBuilderManager : MonoBehaviour
             }
             
         }
-    
+        SaveChanges();
     }
 
     public void AddEditCard(string name, Sprite image)
@@ -409,6 +518,9 @@ public class DeckBuilderManager : MonoBehaviour
                 go.GetComponent<EditCardData>().SetCount(go.GetComponent<EditCardData>().GetCount() + 1);
                 go.GetComponent<EditCardData>().FitData();
                 found = true;
+
+                
+
                 break;
             }
         }
@@ -421,6 +533,7 @@ public class DeckBuilderManager : MonoBehaviour
             editCard.GetComponent<EditCardData>().SetImage(image);
             editCard.GetComponent<EditCardData>().FitData();
         }
+        SaveChanges();
     }
 
     public void GoDeckCollection()

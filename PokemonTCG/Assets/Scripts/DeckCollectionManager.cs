@@ -138,6 +138,7 @@ public class DeckCollectionManager : MonoBehaviour
         GameObject selectedDeck = GetSelectDeck();
 
         if (selectedDeck == null) return;
+        gameData.GetComponent<GameData>().SetDeckBuilderPath(selectedDeck.GetComponent<DeckInstance>().path);
         gameData.GetComponent<GameData>().SetBuilderInfo(selectedDeck.GetComponent<DeckInstance>().GetDeckInfo());
 
         SceneManager.LoadScene("DeckBuilderScene", LoadSceneMode.Additive);

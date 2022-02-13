@@ -10,7 +10,9 @@ public class GameData : MonoBehaviour
     List<List<string>> decksInfo = new List<List<string>>();
     List<string> deckId = new List<string>();
 
+    string deckBuilderPath;
     List<string> deckBuilderInfo = new List<string>(); 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -58,11 +60,20 @@ public class GameData : MonoBehaviour
         this.deckBuilderInfo = builderInfo;
     }
 
+    public void SetDeckBuilderPath(string deckBuilderPath)
+    {
+        this.deckBuilderPath = deckBuilderPath;
+    }
+
     public List<string> GetBuilderInfo()
     {
         return this.deckBuilderInfo;
     }
 
+    public string GetBuilderPath()
+    {
+        return this.deckBuilderPath;
+    }
     public List<string> GetDeckInfo(int i)
     {
         return decksInfo[i];

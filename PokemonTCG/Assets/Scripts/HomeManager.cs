@@ -28,6 +28,12 @@ public class HomeManager : MonoBehaviour
             GameObject.Find("GameData").GetComponent<GameData>().UnloadDecks();
         }
 
+        GameObject aboutObjects = GameObject.Find("AboutObjects");
+        if (aboutObjects)
+        {
+            SceneManager.UnloadSceneAsync("AboutScene");
+        }
+
         InitPlayback();
     }
 
@@ -38,7 +44,7 @@ public class HomeManager : MonoBehaviour
 
     public void About()
     {
-
+        SceneManager.LoadScene("AboutScene", LoadSceneMode.Additive);
     }
 
     public void PlayGame()
