@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - DeckIcon
+  - CollectionCard
+  - EditCard
   layers:
   - Default
   - TransparentFX
