@@ -15,7 +15,7 @@ public class DeckCollectionManager : MonoBehaviour
     public Button createNewButton;
     public GameObject contentParent;
     public GameObject deckIconPrefab;
-
+    
     List<GameObject> decks = new List<GameObject>();
     
 
@@ -31,6 +31,9 @@ public class DeckCollectionManager : MonoBehaviour
         GameObject homeObjects = GameObject.Find("HomeObjects");
         //Gets rid of unecessary scenes in hierarchy to avoid creating additively empty scene gameobjects 
         if(homeObjects) SceneManager.UnloadSceneAsync("HomeScene");
+
+        GameObject deckBuilderObjects = GameObject.Find("DeckBuilderObjects");
+        if (deckBuilderObjects) SceneManager.UnloadSceneAsync("DeckBuilderScene");
 
         //Load from disk
         LoadDecks();

@@ -6,7 +6,7 @@ public class GameData : MonoBehaviour
 {
 
     List<List<TextAsset>> dataInfo = new List<List<TextAsset>>();
-    List<List<Texture>> dataTextureInfo = new List<List<Texture>>();
+    List<List<Sprite>> dataSpriteInfo = new List<List<Sprite>>();
     List<List<string>> decksInfo = new List<List<string>>();
     List<string> deckId = new List<string>();
 
@@ -22,9 +22,9 @@ public class GameData : MonoBehaviour
         this.dataInfo.Add(dataInfo);
     }
 
-    public void AddDataTextureInfo(List<Texture> dataTextureInfo)
+    public void AddDataSpriteInfo(List<Sprite> dataTextureInfo)
     {
-        this.dataTextureInfo.Add(dataTextureInfo);
+        this.dataSpriteInfo.Add(dataTextureInfo);
     }
 
     public void AddDeckInfo(string[] deckInfo, string id)
@@ -58,6 +58,11 @@ public class GameData : MonoBehaviour
         this.deckBuilderInfo = builderInfo;
     }
 
+    public List<string> GetBuilderInfo()
+    {
+        return this.deckBuilderInfo;
+    }
+
     public List<string> GetDeckInfo(int i)
     {
         return decksInfo[i];
@@ -73,9 +78,9 @@ public class GameData : MonoBehaviour
         return dataInfo;
     }
 
-    public List<List<Texture>> GetDataTextureInfo()
+    public List<List<Sprite>> GetDataSpriteInfo()
     {
-        return dataTextureInfo;
+        return dataSpriteInfo;
     }
 
     

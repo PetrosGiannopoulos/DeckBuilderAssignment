@@ -55,7 +55,7 @@ public class LoadingManager : MonoBehaviour
         {
             string setFolderName = setFolderInfo[i];
             List<TextAsset> setDataInfo = new List<TextAsset>();
-            List<Texture> setTextureDataInfo = new List<Texture>();
+            List<Sprite> setSpriteDataInfo = new List<Sprite>();
             for (int j = 0; j < setsTextInfo[i].Count; j++)
             {
                 
@@ -63,15 +63,15 @@ public class LoadingManager : MonoBehaviour
                 TextAsset textAsset = Resources.Load<TextAsset>("PokemonSmallDataCompressed/"+setFolderName+"/"+setsTextInfo[i][j].Name.Replace(".txt",""));
                 //Debug.Log($"Data Info: {textAsset.text}");
                 setDataInfo.Add(textAsset);
-                Texture textureAsset = Resources.Load<Texture>("PokemonSmallDataCompressed/" + setFolderName + "/" + setsTextInfo[i][j].Name.Replace(".txt", ""));
-                setTextureDataInfo.Add(textureAsset);
+                Sprite spriteAsset = Resources.Load<Sprite>("PokemonSmallDataCompressed/" + setFolderName + "/" + setsTextInfo[i][j].Name.Replace(".txt", ""));
+                setSpriteDataInfo.Add(spriteAsset);
 
                 loadingText.text = "Precaching...{" + (i+1) + "}" + ":" + (j+1) + "/" + setsTextInfo[i].Count;
                 yield return new WaitForSeconds(0.005f);
             }
 
             gameData.AddDataInfo(setDataInfo);
-            gameData.AddDataTextureInfo(setTextureDataInfo);
+            gameData.AddDataSpriteInfo(setSpriteDataInfo);
         }
 
         yield return new WaitForSeconds(1f);
