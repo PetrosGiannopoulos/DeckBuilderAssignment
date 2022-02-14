@@ -33,7 +33,7 @@ public class EditCardData : MonoBehaviour
 
     public string GetName()
     {
-        return this.editNameData;
+        return this.editNameData.Replace("\r", "").Replace("\n", "");
     }
 
     public int GetCount()

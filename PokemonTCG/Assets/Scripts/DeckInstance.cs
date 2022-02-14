@@ -26,6 +26,7 @@ public class DeckInstance : MonoBehaviour
 
     public void SetDeckInfo(string[] deckInfo)
     {
+        this.deckInfo.Clear();
         foreach(string s in deckInfo)this.deckInfo.Add(s);
     }
 

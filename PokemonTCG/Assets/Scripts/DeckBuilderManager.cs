@@ -42,6 +42,41 @@ public class DeckBuilderManager : MonoBehaviour
         GameObject gameData = GameObject.Find("GameData");
         if (gameData == null) return;
 
+        List<Sprite> dataSprites = gameData.GetComponent<GameData>().GetSpriteInfo();
+        List<TextAsset> dataInfo = gameData.GetComponent<GameData>().GetTextInfo();
+
+        
+
+        for(int i = 0; i < dataSprites.Count; i++)
+        {
+            Sprite spriteInstance = dataSprites[i];
+            TextAsset textInstance = dataInfo[i];
+
+            string[] lines = textInstance.text.Split('\n');
+
+            var cardCollectionInstance = Instantiate(cardCollectionPrefab, contentParent.transform);
+            string[] nameData = lines[0].Split(' ');
+            string name = nameData[1];
+            if (nameData.Length > 2)
+            {
+                for (int k = 2; k < nameData.Length; k++) name += " " + nameData[k];
+            }
+            cardCollectionInstance.name = name;
+            cardCollectionInstance.GetComponentInChildren<TextMeshProUGUI>().text = name;
+
+            cardCollectionInstance.GetComponent<Image>().sprite = spriteInstance;
+
+            collectionCards.Add(cardCollectionInstance);
+        }
+
+        verticalScrollbar.value = 1.0f;
+    }
+
+    public void LoadCollectionCards_()
+    {
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
+
         List<List<Sprite>> dataSprites = gameData.GetComponent<GameData>().GetDataSpriteInfo();
         List<List<TextAsset>> dataInfo = gameData.GetComponent<GameData>().GetDataInfo();
         for(int i = 0; i < dataSprites.Count; i++)
@@ -79,31 +114,51 @@ public class DeckBuilderManager : MonoBehaviour
         if (gameData == null) return;
 
         List<string> deckData = gameData.GetComponent<GameData>().GetBuilderInfo();
-
-        List<List<Sprite>> dataSprites = gameData.GetComponent<GameData>().GetDataSpriteInfo();
-        List<List<TextAsset>> dataInfo = gameData.GetComponent<GameData>().GetDataInfo();
-        List<string> singleNameList = new List<string>();
-        List<Sprite> singleSpriteList = new List<Sprite>();
-        for (int i = 0; i < dataSprites.Count; i++)
+        
+        //check validity - optional
+        foreach (string s in deckData)
         {
-            for (int j = 0; j < dataSprites[i].Count; j++)
+            string[] lineWords = s.Split(',');
+
+            int count;
+            //validity check
+            if (int.TryParse(lineWords[0], out count) == false) return;
+
+            string name = lineWords[1].Replace("\r","").Replace("\n","");
+
+
+            Sprite sprite = null;
+            foreach (GameObject collectionCard in collectionCards)
             {
-                Sprite spriteInstance = dataSprites[i][j];
-                TextAsset textInstance = dataInfo[i][j];
+                //remove crlf from end of line
+                string sn = collectionCard.name.Replace("\r", "").Replace("\n", "");
 
-                string[] lines = textInstance.text.Split('\n');
-
-                string[] nameData = lines[0].Split(' ');
-                string name = nameData[1];
-                if (nameData.Length > 2)
+                if (sn.Equals(name))
                 {
-                    for (int k = 2; k < nameData.Length; k++) name += " " + nameData[k];
+                    Debug.Log($"Snames: {sn}");
+                    sprite = collectionCard.GetComponent<Image>().sprite;
+                    break;
                 }
-                singleNameList.Add(name);
-                singleSpriteList.Add(spriteInstance);
             }
-        }
 
+            //validity check
+            if (sprite == null) return;
+            //Debug.Log($"LoadDeckName: {name}");
+            for (int j = 0; j < count; j++)
+            {
+                AddEditCard(name, sprite);
+            }
+
+
+        }
+    }
+
+    public void LoadDeck_()
+    {
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
+
+        List<string> deckData = gameData.GetComponent<GameData>().GetBuilderInfo();
 
         //check validity - optional
         foreach (string s in deckData)
@@ -151,9 +206,7 @@ public class DeckBuilderManager : MonoBehaviour
 
         string saveFolderPath = gameData.GetComponent<GameData>().GetBuilderPath();
 
-        
-
-        List<string> originalData = gameData.GetComponent<GameData>().GetBuilderInfo();
+        //List<string> originalData = gameData.GetComponent<GameData>().GetBuilderInfo();
         List<string> currentData = new List<string>();
 
         GameObject[] editCard = GameObject.FindGameObjectsWithTag("EditCard");
@@ -165,10 +218,86 @@ public class DeckBuilderManager : MonoBehaviour
             currentData.Add(s);
         }
 
-        File.WriteAllLines(saveFolderPath, currentData.ToArray());
+        File.WriteAllLines(saveFolderPath.Replace("\r","").Replace("\n",""), currentData.ToArray());
+        //gameData.GetComponent<GameData>().SetDeckInfo(currentData, gameData.GetComponent<GameData>().GetBuilderId());
     }
 
     public void FilterByType()
+    {
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
+
+        toggleSortType = !toggleSortType;
+        foreach (GameObject go in collectionCards) Destroy(go);
+        collectionCards.Clear();
+
+        List<Sprite> dataSprites = gameData.GetComponent<GameData>().GetSpriteInfo();
+        List<TextAsset> dataInfo = gameData.GetComponent<GameData>().GetTextInfo();
+
+        List<CollectionSortData> singleCollectionSortData = new List<CollectionSortData>();
+        for (int i = 0; i < dataSprites.Count; i++)
+        {
+            Sprite spriteInstance = dataSprites[i];
+            TextAsset textInstance = dataInfo[i];
+            singleCollectionSortData.Add(new CollectionSortData(spriteInstance, textInstance));
+        }
+
+        for (int i = 0; i < singleCollectionSortData.Count; i++)
+        {
+            Sprite spriteInstance = dataSprites[i];
+            TextAsset textInstance = dataInfo[i];
+
+
+            string[] lines = textInstance.text.Split('\n');
+            string[] nameData = lines[0].Split(' ');
+            string name = nameData[1];
+            if (nameData.Length > 2)
+            {
+                for (int k = 2; k < nameData.Length; k++) name += " " + nameData[k];
+            }
+
+            string[] typeData = lines[1].Split(' ');
+            string type = typeData[1];
+
+            string[] hpData = lines[2].Split(' ');
+            //Debug.Log($"HPDAtaFormat: {hpData[1]}");
+            /*if (hpData[1].Contains("None"))
+            {
+                Debug.Log($"HPDAtaFormat: {hpData[1][0]}, {hpData[1][4]}");
+                
+            }*/
+            hpData[1] = hpData[1].Replace("\r", "").Replace("\n", "");
+            int hp = hpData[1].Equals("None") ? 0 : int.Parse(hpData[1]);
+
+            string[] rarityData = lines[3].Split(' ');
+            string rarity = rarityData[1];
+
+            singleCollectionSortData[i].name = name;
+            singleCollectionSortData[i].type = type;
+            singleCollectionSortData[i].HP = hp;
+            singleCollectionSortData[i].rarity = GetRarityOrder(rarity);
+        }
+
+        if (toggleSortType) singleCollectionSortData.Sort((x, y) => x.type.CompareTo(y.type));
+        else singleCollectionSortData.Sort((x, y) => y.type.CompareTo(x.type));
+        //someList.Sort((x, y) => x.Value.Length.CompareTo(y.Value.Length));
+
+        for (int i = 0; i < singleCollectionSortData.Count; i++)
+        {
+            var cardCollectionInstance = Instantiate(cardCollectionPrefab, contentParent.transform);
+
+            cardCollectionInstance.name = singleCollectionSortData[i].name;
+            cardCollectionInstance.GetComponentInChildren<TextMeshProUGUI>().text = singleCollectionSortData[i].name;
+
+            cardCollectionInstance.GetComponent<Image>().sprite = singleCollectionSortData[i].sprite;
+
+            collectionCards.Add(cardCollectionInstance);
+        }
+
+        verticalScrollbar.value = 1.0f;
+    }
+
+    public void FilterByType_()
     {
         GameObject gameData = GameObject.Find("GameData");
         if (gameData == null) return;
@@ -259,6 +388,81 @@ public class DeckBuilderManager : MonoBehaviour
         foreach (GameObject go in collectionCards) Destroy(go);
         collectionCards.Clear();
 
+        List<Sprite> dataSprites = gameData.GetComponent<GameData>().GetSpriteInfo();
+        List<TextAsset> dataInfo = gameData.GetComponent<GameData>().GetTextInfo();
+
+        List<CollectionSortData> singleCollectionSortData = new List<CollectionSortData>();
+        for (int i = 0; i < dataSprites.Count; i++)
+        {
+            Sprite spriteInstance = dataSprites[i];
+            TextAsset textInstance = dataInfo[i];
+            singleCollectionSortData.Add(new CollectionSortData(spriteInstance, textInstance));
+        }
+
+        for (int i = 0; i < singleCollectionSortData.Count; i++)
+        {
+            Sprite spriteInstance = dataSprites[i];
+            TextAsset textInstance = dataInfo[i];
+
+
+            string[] lines = textInstance.text.Split('\n');
+            string[] nameData = lines[0].Split(' ');
+            string name = nameData[1];
+            if (nameData.Length > 2)
+            {
+                for (int k = 2; k < nameData.Length; k++) name += " " + nameData[k];
+            }
+
+            string[] typeData = lines[1].Split(' ');
+            string type = typeData[1];
+
+            string[] hpData = lines[2].Split(' ');
+            //Debug.Log($"HPDAtaFormat: {hpData[1]}");
+            /*if (hpData[1].Contains("None"))
+            {
+                Debug.Log($"HPDAtaFormat: {hpData[1][0]}, {hpData[1][4]}");
+                
+            }*/
+            hpData[1] = hpData[1].Replace("\r", "").Replace("\n", "");
+            int hp = hpData[1].Equals("None") ? 0 : int.Parse(hpData[1]);
+
+            string[] rarityData = lines[3].Split(' ');
+            string rarity = rarityData[1];
+
+            singleCollectionSortData[i].name = name;
+            singleCollectionSortData[i].type = type;
+            singleCollectionSortData[i].HP = hp;
+            singleCollectionSortData[i].rarity = GetRarityOrder(rarity);
+        }
+
+        if (toggleSortHP) singleCollectionSortData.Sort((x, y) => x.HP.CompareTo(y.HP));
+        else singleCollectionSortData.Sort((x, y) => y.HP.CompareTo(x.HP));
+        //someList.Sort((x, y) => x.Value.Length.CompareTo(y.Value.Length));
+
+        for (int i = 0; i < singleCollectionSortData.Count; i++)
+        {
+            var cardCollectionInstance = Instantiate(cardCollectionPrefab, contentParent.transform);
+
+            cardCollectionInstance.name = singleCollectionSortData[i].name;
+            cardCollectionInstance.GetComponentInChildren<TextMeshProUGUI>().text = singleCollectionSortData[i].name;
+
+            cardCollectionInstance.GetComponent<Image>().sprite = singleCollectionSortData[i].sprite;
+
+            collectionCards.Add(cardCollectionInstance);
+        }
+
+        verticalScrollbar.value = 1.0f;
+    }
+
+    public void FilterByHP_()
+    {
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
+
+        toggleSortHP = !toggleSortHP;
+        foreach (GameObject go in collectionCards) Destroy(go);
+        collectionCards.Clear();
+
         List<List<Sprite>> dataSprites = gameData.GetComponent<GameData>().GetDataSpriteInfo();
         List<List<TextAsset>> dataInfo = gameData.GetComponent<GameData>().GetDataInfo();
 
@@ -332,8 +536,82 @@ public class DeckBuilderManager : MonoBehaviour
 
         verticalScrollbar.value = 1.0f;
     }
-
     public void FilterByRarity()
+    {
+        GameObject gameData = GameObject.Find("GameData");
+        if (gameData == null) return;
+
+        toggleSortRarity = !toggleSortRarity;
+        foreach (GameObject go in collectionCards) Destroy(go);
+        collectionCards.Clear();
+
+        List<Sprite> dataSprites = gameData.GetComponent<GameData>().GetSpriteInfo();
+        List<TextAsset> dataInfo = gameData.GetComponent<GameData>().GetTextInfo();
+
+        List<CollectionSortData> singleCollectionSortData = new List<CollectionSortData>();
+        for (int i = 0; i < dataSprites.Count; i++)
+        {
+            Sprite spriteInstance = dataSprites[i];
+            TextAsset textInstance = dataInfo[i];
+            singleCollectionSortData.Add(new CollectionSortData(spriteInstance, textInstance));
+        }
+
+        for (int i = 0; i < singleCollectionSortData.Count; i++)
+        {
+            Sprite spriteInstance = dataSprites[i];
+            TextAsset textInstance = dataInfo[i];
+
+
+            string[] lines = textInstance.text.Split('\n');
+            string[] nameData = lines[0].Split(' ');
+            string name = nameData[1];
+            if (nameData.Length > 2)
+            {
+                for (int k = 2; k < nameData.Length; k++) name += " " + nameData[k];
+            }
+
+            string[] typeData = lines[1].Split(' ');
+            string type = typeData[1];
+
+            string[] hpData = lines[2].Split(' ');
+            //Debug.Log($"HPDAtaFormat: {hpData[1]}");
+            /*if (hpData[1].Contains("None"))
+            {
+                Debug.Log($"HPDAtaFormat: {hpData[1][0]}, {hpData[1][4]}");
+                
+            }*/
+            hpData[1] = hpData[1].Replace("\r", "").Replace("\n", "");
+            int hp = hpData[1].Equals("None") ? 0 : int.Parse(hpData[1]);
+
+            string[] rarityData = lines[3].Split(' ');
+            string rarity = rarityData[1];
+
+            singleCollectionSortData[i].name = name;
+            singleCollectionSortData[i].type = type;
+            singleCollectionSortData[i].HP = hp;
+            singleCollectionSortData[i].rarity = GetRarityOrder(rarity);
+        }
+
+        if (toggleSortRarity) singleCollectionSortData.Sort((x, y) => x.rarity.CompareTo(y.rarity));
+        else singleCollectionSortData.Sort((x, y) => y.rarity.CompareTo(x.rarity));
+        //someList.Sort((x, y) => x.Value.Length.CompareTo(y.Value.Length));
+
+        for (int i = 0; i < singleCollectionSortData.Count; i++)
+        {
+            var cardCollectionInstance = Instantiate(cardCollectionPrefab, contentParent.transform);
+
+            cardCollectionInstance.name = singleCollectionSortData[i].name;
+            cardCollectionInstance.GetComponentInChildren<TextMeshProUGUI>().text = singleCollectionSortData[i].name;
+
+            cardCollectionInstance.GetComponent<Image>().sprite = singleCollectionSortData[i].sprite;
+
+            collectionCards.Add(cardCollectionInstance);
+        }
+
+        verticalScrollbar.value = 1.0f;
+    }
+
+    public void FilterByRarity_()
     {
         GameObject gameData = GameObject.Find("GameData");
         if (gameData == null) return;
@@ -511,15 +789,13 @@ public class DeckBuilderManager : MonoBehaviour
         bool found = false;
         foreach(GameObject go in editCards)
         {
-            if (go.GetComponent<EditCardData>().GetName().Equals(name))
+            if (go.GetComponent<EditCardData>().GetName().Equals(name.Replace("\r", "").Replace("\n", "")))
             {
                 if (go.GetComponent<EditCardData>().GetCount()==4 && !go.GetComponent<EditCardData>().GetName().Contains("Energy")) return;
 
                 go.GetComponent<EditCardData>().SetCount(go.GetComponent<EditCardData>().GetCount() + 1);
                 go.GetComponent<EditCardData>().FitData();
                 found = true;
-
-                
 
                 break;
             }

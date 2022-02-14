@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.IO;
 using UnityEditor;
+using SFB;
 
 public class DeckCollectionManager : MonoBehaviour
 {
-
+    
+    
     private int selectedDeck;
 
     public Button createNewButton;
@@ -35,6 +37,12 @@ public class DeckCollectionManager : MonoBehaviour
         GameObject deckBuilderObjects = GameObject.Find("DeckBuilderObjects");
         if (deckBuilderObjects) SceneManager.UnloadSceneAsync("DeckBuilderScene");
 
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Destroy(GameObject.Find("ImportButton"));
+            Destroy(GameObject.Find("ExportButton"));
+        }
+
         //Load from disk
         LoadDecks();
     }
@@ -53,9 +61,14 @@ public class DeckCollectionManager : MonoBehaviour
 
         if (allDecksInfo.Length == 0) return;
         int counter = 0;
+        gameData.GetComponent<GameData>().ClearDeckInfo();
+
+        
         foreach(FileInfo fileInfo in allDecksInfo)
         {
-            string[] lines = File.ReadAllLines(saveFolderPath + "/" + fileInfo.Name);
+            string fullPath = saveFolderPath + "/" + fileInfo.Name;
+
+            string[] lines = File.ReadAllLines(fullPath.Replace("\r","").Replace("\n",""));
             gameData.GetComponent<GameData>().AddDeckInfo(lines,fileInfo.Name);
 
             var deckObj = Instantiate(deckIconPrefab, contentParent.transform);
@@ -65,7 +78,7 @@ public class DeckCollectionManager : MonoBehaviour
 
             deckObj.GetComponent<DeckInstance>().id = fileInfo.Name;
             deckObj.GetComponent<DeckInstance>().path = saveFolderPath + "/" + fileInfo.Name;
-           
+            
 
             counter++;
             decks.Add(deckObj);
@@ -139,6 +152,7 @@ public class DeckCollectionManager : MonoBehaviour
 
         if (selectedDeck == null) return;
         gameData.GetComponent<GameData>().SetDeckBuilderPath(selectedDeck.GetComponent<DeckInstance>().path);
+        gameData.GetComponent<GameData>().SetBuildId(selectedDeck.GetComponent<DeckInstance>().id);
         gameData.GetComponent<GameData>().SetBuilderInfo(selectedDeck.GetComponent<DeckInstance>().GetDeckInfo());
 
         SceneManager.LoadScene("DeckBuilderScene", LoadSceneMode.Additive);
@@ -160,7 +174,9 @@ public class DeckCollectionManager : MonoBehaviour
         GameObject gameData = GameObject.Find("GameData");
         if (gameData == null) return;
         //Optional
-        string path = EditorUtility.OpenFilePanel("Import Deck", "", "txt");
+        //string path = EditorUtility.OpenFilePanel("Import Deck", "", "txt");
+        string[] paths = StandaloneFileBrowser.OpenFilePanel("Import Deck", "","txt",false);
+        string path = paths[0];
         if (path.Length != 0)
         {
             string[] lines = File.ReadAllLines(path);
@@ -197,7 +213,8 @@ public class DeckCollectionManager : MonoBehaviour
     public void Export()
     {
         //Optional
-        string path = EditorUtility.SaveFilePanel("Select Path to Export Deck",Application.persistentDataPath+"/Decks", ".txt","txt");
+        //string path = EditorUtility.SaveFilePanel("Select Path to Export Deck",Application.persistentDataPath+"/Decks", ".txt","txt");
+        string path = StandaloneFileBrowser.SaveFilePanel("Select Path to Export Deck", Application.persistentDataPath + "/Decks", ".txt","txt");
         if (path.Length!=0)
         {
             FileStream fstream = null;
