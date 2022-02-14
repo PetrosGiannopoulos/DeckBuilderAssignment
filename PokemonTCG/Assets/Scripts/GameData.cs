@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour
 {
-
-    List<List<TextAsset>> dataInfo = new List<List<TextAsset>>();
-    List<List<Sprite>> dataSpriteInfo = new List<List<Sprite>>();
-
     List<TextAsset> textInfo = new List<TextAsset>();
     List<Sprite> spriteInfo = new List<Sprite>();
 
@@ -49,33 +45,6 @@ public class GameData : MonoBehaviour
 
         this.spriteInfo = tempList;
     }
-
-    public void AddDataInfo(List<TextAsset> dataInfo)
-    {
-        this.dataInfo.Add(dataInfo);
-    }
-
-    public void AddDataInfo(TextAsset[] dataInfo)
-    {
-        List<TextAsset> tempList = new List<TextAsset>();
-        foreach (TextAsset t in dataInfo) tempList.Add(t);
-
-        this.dataInfo.Add(tempList);
-    }
-
-    public void AddDataSpriteInfo(List<Sprite> dataTextureInfo)
-    {
-        this.dataSpriteInfo.Add(dataTextureInfo);
-    }
-    public void AddDataSpriteInfo(Sprite[] dataTextureInfo)
-    {
-
-        List<Sprite> tempList = new List<Sprite>();
-        foreach(Sprite s in dataTextureInfo) tempList.Add(s);
-
-        this.dataSpriteInfo.Add(tempList);
-    }
-
 
     public void AddDeckInfo(string[] deckInfo, string id)
     {
@@ -161,16 +130,6 @@ public class GameData : MonoBehaviour
     public void UnloadDecks()
     {
         decksInfo.Clear();
-    }
-
-    public List<List<TextAsset>> GetDataInfo()
-    {
-        return dataInfo;
-    }
-
-    public List<List<Sprite>> GetDataSpriteInfo()
-    {
-        return dataSpriteInfo;
     }
 
     public List<TextAsset> GetTextInfo()

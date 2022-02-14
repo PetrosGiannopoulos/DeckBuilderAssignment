@@ -4,15 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class AboutManager : MonoBehaviour
 {
     VideoPlayer videoPlayer;
     public Image backgroundImage;
+    public GameObject roleObj;
+    public GameObject nameObj;
+    public GameObject sepObj;
+
+    private float roleLocalX;
+    private float nameLocalX;
     // Start is called before the first frame update
     void Start()
     {
-        
+        roleLocalX = roleObj.transform.localPosition.x;
+        nameLocalX = nameObj.transform.localPosition.x;
     }
 
     void Awake()
@@ -23,7 +31,53 @@ public class AboutManager : MonoBehaviour
             SceneManager.UnloadSceneAsync("HomeScene");
         }
 
+        StartCoroutine(FadeOutAnimation(2f));
+
         InitPlayback();
+    }
+
+    IEnumerator FadeOutAnimation(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        roleObj.transform.DOLocalMoveX(-500,2);
+        nameObj.transform.DOLocalMoveX(700, 2);
+
+        Color color = sepObj.GetComponent<Image>().color;
+        float alphaStep = 1f/255f;
+
+        float duration = 2f;
+        float timeStep = duration * alphaStep;
+
+        for(int i = 0; i < 255; i++)
+        {
+            color.a -= alphaStep;
+            sepObj.GetComponent<Image>().color = color;
+            yield return new WaitForSeconds(timeStep);
+        }
+        
+    }
+
+    IEnumerator FadeInAnimation(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        roleObj.transform.DOLocalMoveX(roleLocalX, 2);
+        nameObj.transform.DOLocalMoveX(nameLocalX, 2);
+
+        Color color = sepObj.GetComponent<Image>().color;
+        float alphaStep = 1f / 255f;
+
+        float duration = 2f;
+        float timeStep = duration * alphaStep;
+
+        for (int i = 0; i < 255; i++)
+        {
+            color.a += alphaStep;
+            sepObj.GetComponent<Image>().color = color;
+            yield return new WaitForSeconds(timeStep);
+        }
+
     }
 
     private void VideoPlayer_prepareCompleted(VideoPlayer source)
@@ -32,6 +86,12 @@ public class AboutManager : MonoBehaviour
         backgroundImage.color = new Color(1, 1, 1);
         source.Play();
 
+    }
+
+    private void VideoPlayer_loopPointReached(VideoPlayer source)
+    {
+
+        StartCoroutine(FadeInAnimation(2f));
     }
 
     public void StopPlayback()
@@ -52,6 +112,8 @@ public class AboutManager : MonoBehaviour
         videoPlayer.Prepare();
 
         backgroundImage.material.renderQueue = 3000;
+
+        videoPlayer.loopPointReached += VideoPlayer_loopPointReached;
     }
 
     // Update is called once per frame

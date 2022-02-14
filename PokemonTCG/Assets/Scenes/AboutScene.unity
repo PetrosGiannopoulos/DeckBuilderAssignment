@@ -316,6 +316,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 59669044}
+  roleObj: {fileID: 536012191}
+  nameObj: {fileID: 1884820444}
+  sepObj: {fileID: 1304926669}
 --- !u!1 &466416216
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 642943564}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GroupAbout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

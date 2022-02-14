@@ -98,12 +98,13 @@ public class LoadingManager : MonoBehaviour
         }
 
         loadingText.text = "Loading... Please Wait";
+        List<TextAsset> setDataInfo = new List<TextAsset>();
+        List<Sprite> setSpriteDataInfo = new List<Sprite>();
         yield return new WaitForSeconds(1);
         for (int i = 0; i < setsTextInfo.Count; i++)
         {
             string setFolderName = setFolderInfo[i];
-            List<TextAsset> setDataInfo = new List<TextAsset>();
-            List<Sprite> setSpriteDataInfo = new List<Sprite>();
+            
             for (int j = 0; j < setsTextInfo[i].Count; j++)
             {
                 
@@ -116,11 +117,15 @@ public class LoadingManager : MonoBehaviour
 
                 loadingText.text = "Precaching...{" + (i+1) + "}" + ":" + (j+1) + "/" + setsTextInfo[i].Count;
                 yield return new WaitForSeconds(0.005f);
+
+                
             }
 
-            gameData.AddDataInfo(setDataInfo);
-            gameData.AddDataSpriteInfo(setSpriteDataInfo);
+            
         }
+
+        gameData.AddTextInfo(setDataInfo);
+        gameData.AddSpriteInfo(setSpriteDataInfo);
 
         yield return new WaitForSeconds(1f);
         loadingText.text = "";

@@ -381,7 +381,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 231767519}
   m_OnClick:
     m_PersistentCalls:
@@ -664,7 +664,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 630270915}
   m_OnClick:
     m_PersistentCalls:
@@ -813,7 +813,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 737857008}
   m_OnClick:
     m_PersistentCalls:
@@ -2194,6 +2194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e49934eb796b344b3473e1f039d2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editButton: {fileID: 231767518}
+  deleteButton: {fileID: 630270914}
+  exportButton: {fileID: 737857007}
 --- !u!1 &1362237504
 GameObject:
   m_ObjectHideFlags: 0

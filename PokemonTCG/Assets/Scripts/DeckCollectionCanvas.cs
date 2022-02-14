@@ -10,6 +10,10 @@ public class DeckCollectionCanvas : MonoBehaviour
     PointerEventData m_PointerEventData;
     EventSystem m_EventSystem;
 
+    public Button editButton;
+    public Button deleteButton;
+    public Button exportButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +46,9 @@ public class DeckCollectionCanvas : MonoBehaviour
                     hitDeck = true;
                     ClearDeckIcons();
                     result.gameObject.GetComponent<DeckInstance>().SelectButton();
+                    editButton.interactable = true;
+                    deleteButton.interactable = true;
+                    exportButton.interactable = true;
                     break;
                 }
 
@@ -51,7 +58,14 @@ public class DeckCollectionCanvas : MonoBehaviour
                 }
                 //Debug.Log("Hit " + result.gameObject.name);
             }
-            if (hitDeck == false) ClearDeckIcons();
+            if (hitDeck == false)
+            {
+                editButton.interactable = false;
+                deleteButton.interactable = false;
+                exportButton.interactable = false;
+
+                ClearDeckIcons();
+            }
         }
     }
 
